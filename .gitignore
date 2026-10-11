@@ -1,0 +1,36 @@
+# Video: quá lớn cho GitHub (100 MB/file) và Cloudflare Pages (25 MB/file)
+# -> chỉ giữ trên máy + Cloudflare R2, trang phát qua VIDEO_BASE_URL trong config.js.
+# Viết dạng [mM][pP]4 để bắt cả đuôi viết hoa (.MP4, .Mov...) trên mọi hệ điều hành.
+videos/**/*.[mM][pP]4
+videos/**/*.[mM]4[vV]
+videos/**/*.[mM][oO][vV]
+videos/**/*.[mM][kK][vV]
+videos/**/*.[wW][eE][bB][mM]
+
+# Biến môi trường / thông tin bí mật
+.env
+.env.*
+.dev.vars
+*.pem
+*.key
+
+# Công cụ Node / Cloudflare (nếu sau này dùng)
+node_modules/
+.wrangler/
+npm-debug.log*
+
+# File tạm (serve.py ghi file .tmp khi lưu / tải video lên)
+*.tmp
+*.log
+
+# Python
+__pycache__/
+*.pyc
+
+# Hệ điều hành / trình soạn code
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+*.code-workspace

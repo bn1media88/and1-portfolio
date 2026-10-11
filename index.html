@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bn1.media — Video Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Fraunces:ital,opsz,wght@1,9..144,400&family=Inter:wght@300..600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Nền xanh: các dải sáng lượn liên tục (app.js vẽ) -->
+  <canvas class="bg-waves" id="bgWaves" aria-hidden="true"></canvas>
+
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Bn1.media — back to top"><img src="logo-bn1.png" alt="Bn1.media" width="1043" height="240"></a>
+    </header>
+
+    <!-- HERO -->
+    <!-- ABOUT ME: tiêu đề trên thanh xanh chạy ra mép phải, chữ <strong> tô màu xanh -->
+    <section class="about-me" id="about">
+      <div class="about-me-head">
+        <h2 class="about-title" data-edit="text.aboutMeTitle"></h2>
+      </div>
+      <div class="about-me-row">
+        <div class="about-me-body">
+          <p data-edit="text.aboutMeText"></p>
+          <p data-edit="text.aboutMeGoal"></p>
+        </div>
+        <!-- Timeline dựng phim mini (trang trí, chỉ hiện trên máy tính): đầu phát chạy, sóng âm nhấp nháy, timecode đếm -->
+        <div class="nle" aria-hidden="true">
+          <div class="nle-top">
+            <span class="nle-dots"><i></i><i></i><i></i></span>
+            <span class="nle-name">Showreel_2026.prproj</span>
+            <span class="nle-tc" id="nleTc">00:00:00:00</span>
+          </div>
+          <div class="nle-body">
+            <div class="nle-ruler"></div>
+            <div class="nle-track"><b>V2</b><div class="lane">
+              <span class="clip c-title" style="--x:6%;--w:20%;--d:.15s">Title</span>
+              <span class="clip c-fx" style="--x:56%;--w:18%;--d:.35s">Glow</span>
+            </div></div>
+            <div class="nle-track"><b>V1</b><div class="lane">
+              <span class="clip c-v1" style="--x:0%;--w:27%;--d:.05s">Intro</span>
+              <span class="clip c-v2" style="--x:28%;--w:23%;--d:.2s">B-roll</span>
+              <span class="clip c-v1" style="--x:52%;--w:28%;--d:.3s">Interview</span>
+              <span class="clip c-v2" style="--x:81%;--w:19%;--d:.45s">Outro</span>
+            </div></div>
+            <div class="nle-track audio"><b>A1</b><div class="lane">
+              <span class="clip c-a1" style="--x:0%;--w:80%;--d:.25s"><span class="wave" data-bars="56"></span></span>
+            </div></div>
+            <div class="nle-track audio"><b>A2</b><div class="lane">
+              <span class="clip c-a2" style="--x:12%;--w:88%;--d:.4s"><span class="wave" data-bars="60"></span></span>
+            </div></div>
+            <div class="nle-ph-lane"><div class="nle-ph"><i></i></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Điện thoại: Creativity • Learning • Evolving thành 1 hàng ngang (app.js lấy từ text.tags) -->
+      <p class="tags-row" id="tagsRow"></p>
+    </section>
+
+    <section class="hero">
+      <!-- Phần mềm (dải phim chạy ngang) + Liên hệ (nút viên) -->
+      <div class="toolbelt">
+        <div class="tb-group">
+          <div class="kicker"><span></span><p class="caps accent" data-edit="text.skillsTitle"></p><span></span></div>
+          <div class="film">
+            <!-- app.js nhân đôi danh sách để dải phim chạy vòng liền mạch -->
+            <ul class="film-track">
+              <li><img src="icons/after-effects.svg" alt="">After Effects</li>
+              <li><img src="icons/premiere-pro.svg" alt="">Premiere Pro</li>
+              <li><img src="icons/capcut.svg" alt="">CapCut</li>
+              <li><img src="icons/photoshop.svg" alt="">Photoshop</li>
+              <li><img src="icons/blender.svg" alt="">Blender</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tb-group">
+          <div class="kicker"><span></span><p class="caps accent" data-edit="text.socialTitle"></p><span></span></div>
+          <!-- Link lấy từ content.js (social); chế độ sửa thì bấm nút để nhập -->
+          <ul class="chips" id="social">
+            <li><a data-social="instagram" target="_blank" rel="noopener"><img src="icons/instagram.svg" alt="">Instagram</a></li>
+            <li><a data-social="gmail" target="_blank" rel="noopener"><img src="icons/gmail.svg" alt="">Gmail</a></li>
+            <li><a data-social="whatsapp" target="_blank" rel="noopener"><img src="icons/whatsapp.svg" alt="">WhatsApp</a></li>
+            <li><a data-social="tiktok" target="_blank" rel="noopener"><img src="icons/tiktok.svg" alt="">TikTok</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="hero-head">
+        <div>
+          <p class="eyebrow" data-edit="text.eyebrow"></p>
+          <h1 class="display" data-edit="text.title"></h1>
+          <p class="lead" data-edit="text.lead"></p>
+        </div>
+        <aside class="status">
+          <p class="tags" data-edit="text.tags"></p>
+        </aside>
+      </div>
+
+      <!-- Ánh sáng môi trường: app.js vẽ khung hình thu nhỏ của video vào canvas, CSS làm nhoè ra phía sau -->
+      <div class="player-wrap">
+      <canvas class="ambient" aria-hidden="true"></canvas>
+      <div class="player" id="player" data-media="hero" data-autoplay>
+        <video class="media" playsinline muted loop preload="metadata"></video>
+        <div class="shade"></div>
+        <!-- Giới thiệu ngắn: hiện khi rê chuột lên video -->
+        <div class="hero-fade" aria-hidden="true"></div>
+        <div class="hero-info">
+          <p class="caps accent" data-edit="text.infoTitle"></p>
+          <p class="info-lead" data-edit="text.infoText"></p>
+          <dl class="info-list">
+            <div><dt data-edit="text.infoSkillsLabel"></dt><dd data-edit="text.infoSkills"></dd></div>
+            <div><dt data-edit="text.infoEduLabel"></dt><dd data-edit="text.infoEdu"></dd></div>
+            <div><dt data-edit="text.infoExpLabel"></dt><dd data-edit="text.infoExp"></dd></div>
+            <div><dt data-edit="text.infoLangLabel"></dt><dd data-edit="text.infoLang"></dd></div>
+          </dl>
+        </div>
+        <div class="big-play">
+          <button class="ring" type="button" aria-label="Play video">
+            <svg class="i-play" viewBox="0 0 24 24" width="26" height="26"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
+          </button>
+          <span class="big-label" data-edit="text.heroLabel"></span>
+        </div>
+        <div class="controls">
+          <div class="progress" tabindex="0" role="slider" aria-label="Tua video" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <span class="rail"></span><span class="bar"></span>
+          </div>
+          <div class="ctrl-row">
+            <button class="ctrl toggle" type="button" aria-label="Play / pause">
+              <svg class="i-pause" viewBox="0 0 24 24" width="14" height="14"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>
+              <svg class="i-play" viewBox="0 0 24 24" width="14" height="14"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
+            </button>
+            <span class="time"><span class="cur">00:00</span> / <span class="dur">00:00</span></span>
+            <span class="spacer"></span>
+            <button class="ctrl sound" type="button">
+              <svg class="i-muted" viewBox="0 0 24 24" width="16" height="16"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+              <svg class="i-sound" viewBox="0 0 24 24" width="16" height="16"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
+              <span class="sound-label">Unmute</span>
+            </button>
+            <button class="ctrl fs" type="button" aria-label="Fullscreen">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <!-- DỰ ÁN -->
+    <section class="works" id="du-an">
+      <div class="section-head">
+        <h2 class="h2" data-edit="text.worksTitle"></h2>
+        <span class="rule long"></span>
+        <p class="tagline" data-edit="text.worksTagline"></p>
+        <a class="see-all" href="#du-an">
+          <span data-edit="text.worksAll"></span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h17M14 6l6 6-6 6"/></svg>
+        </a>
+        <button class="head-add edit-only" id="addCatTop" type="button">+ Thêm mục</button>
+      </div>
+      <!-- Mỗi thể loại 1 hàng, hiện 3 video, gạt ngang để xem thêm -->
+      <div class="rows" id="grid"></div>
+      <button class="add-card edit-only" id="addCard" type="button">+ Thêm mục</button>
+    </section>
+
+  </div>
+
+  <template id="rowTpl">
+    <div class="row">
+      <span class="row-bg" aria-hidden="true"></span>
+      <div class="row-head">
+        <h3 class="row-title"></h3>
+        <span class="row-count"></span>
+        <button class="row-add edit-only" type="button">+ Thêm video</button>
+        <button class="row-del edit-only" type="button" aria-label="Xóa thể loại">×</button>
+        <div class="row-nav">
+          <button class="nav-btn prev" type="button" aria-label="Previous video"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button class="nav-btn next" type="button" aria-label="Next video"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+      <div class="track"></div>
+      <div class="pager"><span class="pg-cur">01</span><span class="pg-line"><i></i></span><span class="pg-total">01</span></div>
+    </div>
+  </template>
+
+  <template id="cardTpl">
+    <article class="card">
+      <canvas class="ambient" aria-hidden="true"></canvas>
+      <div class="thumb" tabindex="0" role="button">
+        <video class="media" playsinline muted loop preload="metadata"></video>
+        <span class="mini-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="13" height="13"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+        <span class="preview-bar"><i></i></span>
+      </div>
+      <h3 class="card-title"></h3>
+      <p class="card-meta"></p>
+      <label class="cat-pick edit-only">Thể loại <select></select></label>
+    </article>
+  </template>
+
+  <!-- Thanh công cụ chỉnh sửa (ẩn khi mở trang với ?view) -->
+  <div class="dock" id="dock">
+    <div class="dock-hint edit-only">
+      Bấm vào chữ để sửa · Bôi đen + <kbd>Ctrl</kbd>+<kbd>I</kbd> để in nghiêng · <kbd>Enter</kbd> xuống dòng<br>
+      About me: bôi đen + <kbd>Ctrl</kbd>+<kbd>B</kbd> để tô chữ màu xanh<br>
+      Rê chuột lên khung video để <b>tải video lên</b> hoặc <b>dán link</b><br>
+      Liên hệ: bấm vào biểu tượng Instagram / Gmail / WhatsApp / TikTok để nhập link<br>
+      Bấm <b>✓ Xong</b> để lưu thẳng vào file (cần mở trang bằng <b>Mo trang.bat</b>)
+    </div>
+    <div class="dock-row">
+      <span class="dock-status" id="saveStatus" aria-live="polite"></span>
+      <button class="edit-only" id="exportBtn" type="button">Xuất content.js</button>
+      <button class="edit-only" id="resetBtn" type="button">Khôi phục</button>
+      <button class="dock-main" id="toggleEdit" type="button">✎ Chỉnh sửa</button>
+    </div>
+  </div>
+
+  <input type="file" id="filePick" accept="video/*" hidden>
+
+  <dialog id="lightbox">
+    <button class="lb-close" type="button" aria-label="Close">×</button>
+    <video controls playsinline></video>
+    <p class="lb-caption"></p>
+  </dialog>
+
+  <script src="config.js"></script>
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
